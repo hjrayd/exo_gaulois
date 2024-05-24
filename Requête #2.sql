@@ -70,8 +70,6 @@ FROM bataille
 INNER JOIN prendre_casque ON bataille.id_bataille = prendre_casque.id_bataille
 
 /*11-Combien existe-il de casques de chaque type et quel est leur cpût total ? (classés par nombre décroissant)*/
-
-
 SELECT type_casque.nom_type_casque,
 COUNT(type_casque.id_type_casque),
 SUM(casque.cout_casque) AS cout_total_casque
@@ -87,3 +85,16 @@ FROM potion
 INNER JOIN composer ON composer.id_potion = potion.id_potion
 INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
 WHERE ingredient.nom_ingredient = 'Poisson frais';
+
+/*13-Nom du/des lieux possédant le plus d'habitants, en dehors du village gaulois.*/
+
+
+
+/*14-Nom des personnage qui n'ont jamais bu de potions*/
+
+SELECT personnage.nom_personnage
+FROM personnage
+WHERE personnage.id_personnage NOT IN (
+	SELECT personnage.id_personnage 
+	FROM personnage
+INNER JOIN boire ON personnage.id_personnage = boire.id_personnage);
