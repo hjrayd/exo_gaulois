@@ -112,3 +112,14 @@ NOT IN (SELECT personnage.id_personnage
 	FROM personnage
 		INNER JOIN autoriser_boire ON personnage.id_personnage = autoriser_boire.id_personnage
 	WHERE id_potion=1);
+
+    /*A- Ajoutez le personnage suivant: Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus*/
+
+INSERT INTO personnage (nom_personnage, id_specialite, adresse_personnage, id_lieu)
+VALUES ('Champdeblix', 12, 'Ferme Hantassion', '6');
+
+/*B- AUTORISEZ Bonemine à boire de la potion magique,*/
+
+INSERT INTO autoriser_boire (id_potion, id_personnage)
+VALUES ( 1, 12);
+/*C- Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille /*
