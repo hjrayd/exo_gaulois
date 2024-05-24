@@ -87,6 +87,10 @@ INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
 WHERE ingredient.nom_ingredient = 'Poisson frais';
 
 /*13-Nom du/des lieux possédant le plus d'habitants, en dehors du village gaulois.*/
+SELECT lieu.nom_lieu
+FROM lieu
+INNER JOIN personnage ON lieu_id_lieu = personnage.id_lieu
+WHERE lieu.nom_lieu != 'Village gaulois'
 
 
 
@@ -97,7 +101,7 @@ FROM personnage
 WHERE personnage.id_personnage NOT IN (
 	SELECT personnage.id_personnage 
 	FROM personnage
-INNER JOIN boire ON personnage.id_personnage = boire.id_personnage);
+INNER JOIN boire ON personnage.id_personnage = boire.id_personnage)
 
 /*15-Nom du/des personnages qui n'ont pas le droit de boire de la potion 'Magique'*/
 
