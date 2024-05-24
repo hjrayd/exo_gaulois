@@ -131,4 +131,9 @@ DELETE */
 UPDATE personnage
 SET adresse_personnage = 'Prison',
 id_lieu = 9
-WHERE id = 23;
+WHERE id = 23;*/
+
+/*E-La 'Soupe' ne doit plus contenir de  persil. */
+
+DELETE FROM composer
+WHERE (id_potion = 9 AND id_ingredient = 19);
