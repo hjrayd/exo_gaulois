@@ -122,7 +122,7 @@ VALUES ('Champdeblix', 12, 'Ferme Hantassion', '6');
 
 INSERT INTO autoriser_boire (id_potion, id_personnage)
 VALUES ( 1, 12);
-/*C- Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille /*
+/*C- Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille */
 
 DELETE */
 
@@ -131,9 +131,16 @@ DELETE */
 UPDATE personnage
 SET adresse_personnage = 'Prison',
 id_lieu = 9
-WHERE id = 23;*/
+WHERE id = 23;
 
 /*E-La 'Soupe' ne doit plus contenir de  persil. */
 
 DELETE FROM composer
 WHERE (id_potion = 9 AND id_ingredient = 19);
+
+/*F-Obelix s'est trompé: ce sont 42 casques Weisenau, et non Ostrogoths qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur.*/
+
+UPDATE prendre_casque 
+SET id_casque= 10
+qte = 42
+WHERE id_bataille = 9;
