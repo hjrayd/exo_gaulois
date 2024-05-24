@@ -123,3 +123,12 @@ VALUES ('Champdeblix', 12, 'Ferme Hantassion', '6');
 INSERT INTO autoriser_boire (id_potion, id_personnage)
 VALUES ( 1, 12);
 /*C- Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille /*
+
+DELETE */
+
+/*D-Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate*/
+
+UPDATE personnage
+SET adresse_personnage = 'Prison',
+id_lieu = 9
+WHERE id = 23;
