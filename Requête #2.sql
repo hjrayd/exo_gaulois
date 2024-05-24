@@ -45,3 +45,21 @@ INNER JOIN composer ON potion.id_potion = composer.id_potion
 INNER JOIN ingredient ON composer.id_ingredient = ingredient.id_ingredient
 GROUP BY potion.id_potion
 ORDER BY prix_potion DESC;
+
+/*7- Nom des ingrédients+coût+quantité de chaque ingrédients qui composent la potion 'santé'*/
+
+SELECT ingredient.nom_ingredient, ingredient.cout_ingredient, composer.qte
+FROM ingredient
+INNER JOIN composer ON ingredient.id_ingredient = composer.id_ingredient
+INNER JOIN potion ON composer.id_potion = potion.id_potion
+WHERE potion.nom_potion = 'Santé';
+
+/*8-Nom du ou des personnages qui ont pris le plus de casques dans la bataille '	Bataille du village gaulois'*/
+
+/*9-Nom des personnages et leur quantité de potion bue (en les lcassant du plus grand buveur au plus petit)*/
+SELECT personnage.nom_personnage,
+SUM(boire.dose_boire) AS 'quantite_potion_bue'
+FROM personnage
+INNER JOIN boire ON personnage.id_personnage = boire.id_personnage
+GROUP BY personnage.id_personnage
+ORDER BY quantite_potion_bue DESC;
