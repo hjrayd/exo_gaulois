@@ -16,7 +16,11 @@ GROUP BY personnage.id_lieu
 ORDER BY nb_personnages DESC;
 
 /* 3- Nom des personnages + spécialité + adresse et lieu d'habitation, triés par lieu puis par nom de personnage*/
-
+SELECT personnage.nom_personnage, specialite.nom_specialite, personnage.adresse_personnage, lieu.nom_lieu
+FROM personnage
+INNER JOIN lieu ON personnage.id_lieu = lieu.id_lieu
+INNER JOIN specialite ON personnage.id_specialite = specialite.id_specialite
+ORDER BY lieu.nom_lieu, personnage.nom_personnage;
 /* 4- Nom des spécialités avec nombres des personnages par spécialité (trié par nombre de personnage décroissant*/
 
 SELECT nom_specialite,
