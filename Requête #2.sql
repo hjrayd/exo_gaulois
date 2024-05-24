@@ -63,3 +63,19 @@ FROM personnage
 INNER JOIN boire ON personnage.id_personnage = boire.id_personnage
 GROUP BY personnage.id_personnage
 ORDER BY quantite_potion_bue DESC;
+
+/*10-Nom de la bataille oèu le nombre de casques pris a été le plus important*/
+SELECT bataille.nom_bataille
+FROM bataille
+INNER JOIN prendre_casque ON bataille.id_bataille = prendre_casque.id_bataille
+
+/*11-Combien existe-il de casques de chaque type et quel est leur cpût total ? (classés par nombre décroissant)*/
+
+
+SELECT type_casque.nom_type_casque,
+COUNT(type_casque.id_type_casque),
+SUM(casque.cout_casque) AS cout_total_casque
+FROM type_casque
+INNER JOIN casque ON type_casque.id_type_casque = casque.id_type_casque
+GROUP BY type_casque.id_type_casque
+ORDER BY cout_total_casque DESC;
