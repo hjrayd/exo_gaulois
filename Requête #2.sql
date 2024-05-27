@@ -127,8 +127,14 @@ SELECT lieu.nom_lieu
 FROM lieu
 INNER JOIN personnage 
 ON lieu.id_lieu = personnage.id_lieu
-WHERE lieu.nom_lieu != 'Village gaulois';
-
+WHERE lieu.nom_lieu != 'Village gaulois'
+GROUP BY personnage.id_lieu
+HAVING COUNT(personnage.id_lieu)>= ALL (
+SELECT COUNT(personnage;id_lieu) AS nombre_habitant
+FROM lieu
+INNER JOIN personnage ON lieu.id_lieu = personnage.id_lieu
+WHERE lieu.nom_lieu <> 'Village gaulois'
+GROUP BY personnage.id_lieu);
 
 /*14-Nom des personnage qui n'ont jamais bu de potions*/
 
