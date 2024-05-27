@@ -11,7 +11,7 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
-$sqlQuery = 'SELECT nom_personnage, lieu.nom_lieu FROM personnage
+$sqlQuery = 'SELECT nom_personnage, lieu.nom_lieu, id_personnage FROM personnage
 JOIN lieu ON personnage.id_lieu = lieu.id_lieu';
 
 $persoStatement = $mysqlClient->prepare($sqlQuery);
@@ -26,7 +26,7 @@ echo "<table>
 
 foreach ($personnages as $personnage) {
     echo "<tr>
-    <td> <a href='potion.php?id=.$personnage['id_personnage']'.$personnage['nom_personnage'].></a></td>
+    <td><a href='potion.php?id=".$personnage['id_personnage']."'>".$personnage['nom_personnage']."</a></td>
     <td>".$personnage['nom_lieu']."</td>";
 }
 
