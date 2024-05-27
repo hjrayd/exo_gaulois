@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 
 try
 {
@@ -25,7 +26,7 @@ echo "<table>
 
 foreach ($personnages as $personnage) {
     echo "<tr>
-    <td>".$personnage['nom_personnage']."</td>
+    <td><a href=".$personnage['nom_personnage']."></a></td>
     <td>".$personnage['nom_lieu']."</td>";
 }
 

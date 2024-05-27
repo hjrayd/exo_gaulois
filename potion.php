@@ -10,8 +10,8 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
-$sqlQuery = 'SELECT potion.nom_potion FROM potion
-JOIN potion ON boire.id_potion = potion.id_potion
+$sqlQuery = 'SELECT potion.nom_potion, personnage.nom_personnage FROM potion
+JOIN boire ON potion.id_potion = boire.id_potion
 JOIN personnage ON boire.id_personnage = personnage.id_personnage';
 
 $potionStatement = $mysqlClient->prepare($sqlQuery);
@@ -26,7 +26,6 @@ echo "<table>
 foreach ($potions as $potion) {
     echo "<tr>
     <td>".$potion['nom_potion']."</td>";
-    
 }
 
 echo "</table>"
