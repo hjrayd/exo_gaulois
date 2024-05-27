@@ -93,7 +93,13 @@ ORDER BY quantite_potion_bue DESC;
 SELECT bataille.nom_bataille
 FROM bataille
 INNER JOIN prendre_casque 
-ON bataille.id_bataille = prendre_casque.id_bataille;
+ON bataille.id_bataille = prendre_casque.id_bataille
+GROUP BY bataille.id_bataille
+HAVING SUM(prendre_casque.qte) >= ALL (
+SELECT SUM(prendre_casque.qte) AS nombre_casque_pris
+FROM bataille
+INNER JOIN prendre_casque ON bataille.id_bataille = prendre_casque.id_bataille
+GROUP BY prendre_casque.id_bataille);
 
 /*11-Combien existe-il de casques de chaque type et quel est leur coût total ? (classés par nombre décroissant)*/
 SELECT type_casque.nom_type_casque,
