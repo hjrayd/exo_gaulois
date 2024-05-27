@@ -26,7 +26,7 @@ echo "<table>
 
 foreach ($personnages as $personnage) {
     echo "<tr>
-    <td><a href=".$personnage['nom_personnage']."></a></td>
+    <td> <a href='potion.php?id=.$personnage['id_personnage']'.$personnage['nom_personnage'].></a></td>
     <td>".$personnage['nom_lieu']."</td>";
 }
 
