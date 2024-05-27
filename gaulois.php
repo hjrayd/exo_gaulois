@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 try
 {
     $mysqlClient = new PDO('mysql:host=localhost;dbname=gaulois_hajar;charset=utf8', 'root', '');
