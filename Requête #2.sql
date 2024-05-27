@@ -1,4 +1,3 @@
-
 /* 1-Nom des lieux qui finissent par 'um'*/
 
 SELECT *
@@ -25,6 +24,7 @@ ON personnage.id_lieu = lieu.id_lieu
 INNER JOIN specialite 
 ON personnage.id_specialite = specialite.id_specialite
 ORDER BY lieu.nom_lieu, personnage.nom_personnage;
+
 /* 4- Nom des spécialités avec nombres des personnages par spécialité (trié par nombre de personnage décroissant*/
 
 SELECT nom_specialite,
@@ -82,12 +82,12 @@ ORDER BY quantite_potion_bue DESC;
 SELECT bataille.nom_bataille
 FROM bataille
 INNER JOIN prendre_casque 
-ON bataille.id_bataille = prendre_casque.id_bataille
+ON bataille.id_bataille = prendre_casque.id_bataille;
 
-/*11-Combien existe-il de casques de chaque type et quel est leur cpût total ? (classés par nombre décroissant)*/
+/*11-Combien existe-il de casques de chaque type et quel est leur coût total ? (classés par nombre décroissant)*/
 SELECT type_casque.nom_type_casque,
 COUNT(type_casque.id_type_casque),
-SUM(casque.cout_casque) 
+SUM(casque.cout_casque)
 AS cout_total_casque
 FROM type_casque
 INNER JOIN casque 
@@ -95,7 +95,7 @@ ON type_casque.id_type_casque = casque.id_type_casque
 GROUP BY type_casque.id_type_casque
 ORDER BY cout_total_casque DESC;
 
-/*12-Nom des potions dont un ingrédients ets le poisson frais*/
+/*12-Nom des potions dont un ingrédients est le poisson frais*/
 
 SELECT potion.nom_potion
 FROM potion
@@ -109,9 +109,8 @@ WHERE ingredient.nom_ingredient = 'Poisson frais';
 SELECT lieu.nom_lieu
 FROM lieu
 INNER JOIN personnage 
-ON lieu_id_lieu = personnage.id_lieu
-WHERE lieu.nom_lieu != 'Village gaulois'
-
+ON lieu.id_lieu = personnage.id_lieu
+WHERE lieu.nom_lieu != 'Village gaulois';
 
 
 /*14-Nom des personnage qui n'ont jamais bu de potions*/
@@ -123,7 +122,7 @@ NOT IN (
 	SELECT personnage.id_personnage 
 	FROM personnage
 INNER JOIN boire 
-ON personnage.id_personnage = boire.id_personnage)
+ON personnage.id_personnage = boire.id_personnage);
 
 /*15-Nom du/des personnages qui n'ont pas le droit de boire de la potion 'Magique'*/
 
@@ -137,7 +136,7 @@ NOT IN (
     ON personnage.id_personnage = autoriser_boire.id_personnage
 	WHERE id_potion=1);
 
-    /*A- Ajoutez le personnage suivant: Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus*/
+ /*A- Ajoutez le personnage suivant: Champdeblix, agriculteur résidant à la ferme Hantassion de Rotomagus*/
 
 INSERT INTO personnage (nom_personnage, id_specialite, adresse_personnage, id_lieu)
 VALUES ('Champdeblix', 12, 'Ferme Hantassion', '6');
@@ -145,7 +144,8 @@ VALUES ('Champdeblix', 12, 'Ferme Hantassion', '6');
 /*B- AUTORISEZ Bonemine à boire de la potion magique,*/
 
 INSERT INTO autoriser_boire (id_potion, id_personnage)
-VALUES ( 1, 12);
+VALUES (1, 12);
+
 /*C- Supprimez les casques grecs qui n'ont jamais été pris lors d'une bataille */
 
 DELETE */
@@ -153,9 +153,8 @@ DELETE */
 /*D-Modifiez l'adresse de Zérozérosix : il a été mis en prison à Condate*/
 
 UPDATE personnage
-SET adresse_personnage = 'Prison',
-id_lieu = 9
-WHERE id = 23;
+SET adresse_personnage = 'Prison', id_lieu = 9
+WHERE id_personnage = 23;
 
 /*E-La 'Soupe' ne doit plus contenir de  persil. */
 
@@ -166,6 +165,16 @@ AND id_ingredient = 19);
 /*F-Obelix s'est trompé: ce sont 42 casques Weisenau, et non Ostrogoths qu'il a pris lors de la bataille 'Attaque de la banque postale'. Corrigez son erreur.*/
 
 UPDATE prendre_casque 
-SET id_casque= 10
-qte = 42
+SET id_casque= 10 , qte = 42
 WHERE id_bataille = 9;
+
+
+
+
+
+
+
+
+
+
+
