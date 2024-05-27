@@ -66,6 +66,17 @@ ON composer.id_potion = potion.id_potion
 WHERE potion.nom_potion = 'Santé';
 
 /*8-Nom du ou des personnages qui ont pris le plus de casques dans la bataille 'Bataille du village gaulois'*/
+SELECT personnage.nom_personnage
+FROM personnage
+INNER JOIN prendre_casque
+ON personnage.id_personnage = prendre_casque.id_personnage
+WHERE prendre_casque.id_bataille = 1
+GROUP BY personnage.id_personnage
+HAVING SUM(prendre_casque.qte) >= ALL
+ ( SELECT SUM(prendre_casque.qte)
+ 	FROM prendre_casque
+ 	WHERE prendre_casque.id_bataille = 1
+ 	GROUP BY prendre_casque.id_personnage);
 
 
 /*9-Nom des personnages et leur quantité de potion bue (en les lcassant du plus grand buveur au plus petit)*/
