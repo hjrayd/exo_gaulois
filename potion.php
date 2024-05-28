@@ -10,37 +10,34 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
-$sqlQuery = 'SELECT DISTINCT potion.nom_potion 
+$sqlQuery = 'SELECT *
+FROM personnage
+WHERE personnage.id_personnage = :id';
+
+$id = $_GET['id'];
+$persoStatement = $mysqlClient->  prepare($sqlQuery);
+$persoStatement -> execute(["id" => $id]);
+$personnage = $persoStatement->fetch();
+
+echo $personnage['nom_personnage'];
+
+
+$sqlQuery2 = 'SELECT DISTINCT potion.nom_potion 
 FROM potion
 JOIN boire ON potion.id_potion = boire.id_potion
 JOIN personnage ON boire.id_personnage = personnage.id_personnage
-WHERE personnage.id_personnage = :id_personnage';
+WHERE personnage.id_personnage = :id';
 
-$get_id_perso = $_GET['id'];
-$potionStatement = $mysqlClient->prepare($sqlQuery);
-$potionStatement -> execute(["id_personnage" => $get_id_perso]);
+
+$potionStatement = $mysqlClient ->prepare($sqlQuery2);
+$potionStatement -> execute(["id" => $id]);
 $potions = $potionStatement->fetchAll();
-
-$sqlQuery = 'SELECT nom_personnage
-FROM personnage
-WHERE personnage.id_personnage = :id_personnage';
-
-$persoStatement = $mysqlClient->prepare($sqlQuery);
-$persoStatement -> execute(["id_personnage" => $get_id_perso]);
-$personnages = $persoStatement->fetch();
-
 
 echo "<table>
         <tr>
-        <th>Personnage</th>
             <th>Potions bues </th>
         </tr>";
-
-        foreach ($personnages as $personnage) {
-            echo "<tr>
-            <td>".$personnage."</td>";
-        }
-
+        
 foreach ($potions as $potion) {
     echo "<td>".$potion['nom_potion']."</td>";
 }
