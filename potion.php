@@ -10,14 +10,17 @@ catch (Exception $e)
     die('Erreur : ' . $e->getMessage());
 }
 
-$sqlQuery = 'SELECT potion.nom_potion, personnage.nom_personnage FROM potion
+$sqlQuery = 'SELECT DISTINCT potion.nom_potion 
+FROM potion
 JOIN boire ON potion.id_potion = boire.id_potion
-JOIN personnage ON boire.id_personnage = personnage.id_personnage';
+JOIN personnage ON boire.id_personnage = personnage.id_personnage
+WHERE personnage.id_personnage = :id_personnage';
 
-$potionStatement = $mysqlClient->prepare($sqlQuery);
-$potionStatement -> execute();
-$potions = $potionStatement->fetchAll();
 $get_id_perso = $_GET['id'];
+$potionStatement = $mysqlClient->prepare($sqlQuery);
+$potionStatement -> execute(["id_personnage" => $get_id_perso]);
+$potions = $potionStatement->fetchAll();
+
 
 
 echo "<table>
