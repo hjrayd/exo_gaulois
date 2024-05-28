@@ -21,16 +21,28 @@ $potionStatement = $mysqlClient->prepare($sqlQuery);
 $potionStatement -> execute(["id_personnage" => $get_id_perso]);
 $potions = $potionStatement->fetchAll();
 
+$sqlQuery = 'SELECT nom_personnage
+FROM personnage
+WHERE personnage.id_personnage = :id_personnage';
+
+$persoStatement = $mysqlClient->prepare($sqlQuery);
+$persoStatement -> execute(["id_personnage" => $get_id_perso]);
+$personnages = $persoStatement->fetch();
 
 
 echo "<table>
         <tr>
+        <th>Personnage</th>
             <th>Potions bues </th>
         </tr>";
 
+        foreach ($personnages as $personnage) {
+            echo "<tr>
+            <td>".$personnage."</td>";
+        }
+
 foreach ($potions as $potion) {
-    echo "<tr>
-    <td>".$potion['nom_potion']."</td>";
+    echo "<td>".$potion['nom_potion']."</td>";
 }
 
 
