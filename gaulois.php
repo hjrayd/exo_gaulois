@@ -1,6 +1,5 @@
 <?php
 session_start();
-ob_start();
 
 try
 {
@@ -29,6 +28,8 @@ foreach ($personnages as $personnage) {
     <td><a href='potion.php?id=".$personnage['id_personnage']."'>".$personnage['nom_personnage']."</a></td>
     <td>".$personnage['nom_lieu']."</td>";
 }
+
+
 
 echo "</table>"
 

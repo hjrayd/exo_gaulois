@@ -17,6 +17,8 @@ JOIN personnage ON boire.id_personnage = personnage.id_personnage';
 $potionStatement = $mysqlClient->prepare($sqlQuery);
 $potionStatement -> execute();
 $potions = $potionStatement->fetchAll();
+$get_id_perso = $_GET['id'];
+
 
 echo "<table>
         <tr>
@@ -27,6 +29,7 @@ foreach ($potions as $potion) {
     echo "<tr>
     <td>".$potion['nom_potion']."</td>";
 }
+
 
 echo "</table>"
 
